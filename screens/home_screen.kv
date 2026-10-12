@@ -1,0 +1,42 @@
+#:import dp kivy.metrics.dp
+<HomeScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        padding: 30
+        spacing: 18
+
+        Label:
+            text: "Soping Lista"
+            font_size: "30sp"
+            bold: True
+            size_hint_y: 0.28
+
+        PrimaryButton:
+            text: "Nova lista za kupovinu"
+            font_size: "18sp"
+            size_hint_y: None
+            height: dp(56)
+            on_release: root.go_to_new_list()
+
+        SecondaryButton:
+            text: "Istorija kupovina"
+            font_size: "18sp"
+            size_hint_y: None
+            height: dp(56)
+            on_release: root.go_to_history()
+
+        SecondaryButton:
+            text: "Baza proizvoda i prodavnica"
+            font_size: "18sp"
+            size_hint_y: None
+            height: dp(56)
+            on_release: root.go_to_database()
+
+        SecondaryButton:
+            text: "Podesavanja"
+            font_size: "18sp"
+            size_hint_y: None
+            height: dp(56)
+            on_release: root.go_to_settings()
+
+        Widget:

@@ -1,0 +1,26 @@
+#:import dp kivy.metrics.dp
+<HistoryScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        padding: 15
+        spacing: 10
+
+        BoxLayout:
+            size_hint_y: None
+            height: dp(48)
+            spacing: 10
+            SecondaryButton:
+                text: "< Nazad"
+                size_hint_x: 0.3
+                on_release: root.go_back()
+            Label:
+                text: "Istorija kupovina"
+                font_size: "18sp"
+
+        ScrollView:
+            BoxLayout:
+                id: history_box
+                orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(10)

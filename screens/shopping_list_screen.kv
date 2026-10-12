@@ -1,0 +1,73 @@
+#:import dp kivy.metrics.dp
+<ShoppingListScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        padding: 15
+        spacing: 10
+
+        BoxLayout:
+            size_hint_y: None
+            height: dp(48)
+            spacing: 10
+
+            SecondaryButton:
+                text: "< Nazad"
+                size_hint_x: 0.3
+                on_release: root.go_back()
+
+            Label:
+                id: store_label
+                text: "Prodavnica: (izbor dolazi)"
+                font_size: "16sp"
+
+        BoxLayout:
+            size_hint_y: None
+            height: dp(30)
+            Label:
+                text: "Proizvod"
+                bold: True
+            Label:
+                text: "Kol."
+                bold: True
+                size_hint_x: 0.4
+            Label:
+                text: "Cena/j."
+                bold: True
+                size_hint_x: 0.5
+            Label:
+                text: "Total"
+                bold: True
+                size_hint_x: 0.5
+
+        ScrollView:
+            size_hint_y: 1
+            BoxLayout:
+                id: items_box
+                orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+
+        PrimaryButton:
+            text: "+ Dodaj proizvod"
+            size_hint_y: None
+            height: dp(52)
+            on_release: root.add_item()
+
+        BoxLayout:
+            size_hint_y: None
+            height: dp(40)
+            Label:
+                text: "UKUPNO:"
+                bold: True
+                font_size: "18sp"
+            Label:
+                id: total_label
+                text: "0.00"
+                bold: True
+                font_size: "18sp"
+
+        SecondaryButton:
+            text: "Zatvori listu"
+            size_hint_y: None
+            height: dp(52)
+            on_release: root.close_list()
