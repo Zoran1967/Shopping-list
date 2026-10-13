@@ -1,1 +1,135 @@
+#:import dp kivy.metrics.dp
 
+<IconHomeButton@ButtonBehavior+BoxLayout>:
+    icon_source: ""
+    label_text: ""
+    orientation: "vertical"
+    padding: dp(6)
+    spacing: dp(2)
+    canvas.before:
+        Color:
+            rgba: 0.06, 0.06, 0.08, 1
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [dp(18)]
+    Image:
+        source: root.icon_source
+        allow_stretch: True
+        keep_ratio: True
+        size_hint_y: 0.72
+    Label:
+        text: root.label_text
+        font_size: "14sp"
+        bold: True
+        halign: "center"
+        valign: "middle"
+        text_size: self.width, None
+        size_hint_y: 0.28
+
+
+<RoundedImageBox@Widget>:
+    canvas.before:
+        StencilPush
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [dp(28)]
+        StencilUse
+    canvas.after:
+        StencilUnUse
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [dp(28)]
+        StencilPop
+
+
+<LanguagePill@ButtonBehavior+BoxLayout>:
+    orientation: "horizontal"
+    padding: dp(6)
+    spacing: dp(4)
+    canvas.before:
+        Color:
+            rgba: 0.15, 0.15, 0.18, 0.92
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [dp(18)]
+    Image:
+        source: app.assets_dir + "globe_icon.png"
+        allow_stretch: True
+        keep_ratio: True
+        size_hint_x: 0.38
+    Label:
+        text: "Language"
+        font_size: "12sp"
+        bold: True
+
+
+<HomeScreen>:
+    canvas.before:
+        Color:
+            rgba: 0.06, 0.06, 0.08, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        orientation: "vertical"
+        padding: dp(20)
+        spacing: dp(14)
+
+        Label:
+            text: "Soping Lista"
+            font_size: "28sp"
+            bold: True
+            size_hint_y: None
+            height: dp(50)
+
+        GridLayout:
+            cols: 2
+            rows: 2
+            spacing: dp(12)
+            size_hint_y: 0.55
+
+            IconHomeButton:
+                icon_source: app.assets_dir + "baza.png"
+                label_text: root.txt_database
+                on_release: root.go_to_database()
+
+            IconHomeButton:
+                icon_source: app.assets_dir + "istorija.png"
+                label_text: root.txt_history
+                on_release: root.go_to_history()
+
+            IconHomeButton:
+                icon_source: app.assets_dir + "nova_lista.png"
+                label_text: root.txt_new_list
+                on_release: root.go_to_new_list()
+
+            IconHomeButton:
+                icon_source: app.assets_dir + "podesavanja.png"
+                label_text: root.txt_settings
+                on_release: root.go_to_settings()
+
+        FloatLayout:
+            size_hint_y: 0.45
+
+            RoundedImageBox:
+                id: cart_box
+                size_hint: 1, 1
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+                Image:
+                    source: app.assets_dir + "icon.png"
+                    allow_stretch: True
+                    keep_ratio: True
+                    pos: cart_box.pos
+                    size: cart_box.size
+
+            LanguagePill:
+                size_hint: None, None
+                size: dp(96), dp(40)
+                pos_hint: {"right": 0.98, "y": 0.02}
+                on_release: root.open_language_picker()

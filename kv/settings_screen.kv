@@ -1,0 +1,125 @@
+#:import dp kivy.metrics.dp
+<SettingsScreen>:
+    FloatLayout:
+        BoxLayout:
+            orientation: "vertical"
+            padding: [20, 20, 20, dp(80)]
+            spacing: 15
+            size_hint: 1, 1
+            pos_hint: {"x": 0, "y": 0}
+
+            Label:
+                id: title_label
+                text: "Podesavanja"
+                font_size: "20sp"
+                bold: True
+                size_hint_y: None
+                height: dp(36)
+
+            ScrollView:
+                BoxLayout:
+                    orientation: "vertical"
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: dp(15)
+                    padding: 0, 0, 0, dp(20)
+
+                    Label:
+                        id: theme_label
+                        text: "Boja teme aplikacije (dugmad)"
+                        font_size: "16sp"
+                        size_hint_y: None
+                        height: dp(30)
+                        color: 0.7, 0.7, 0.7, 1
+
+                    BoxLayout:
+                        id: theme_box
+                        orientation: "vertical"
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: dp(10)
+
+                    Label:
+                        id: bg_label
+                        text: "Boja pozadine ekrana"
+                        font_size: "16sp"
+                        size_hint_y: None
+                        height: dp(30)
+                        color: 0.7, 0.7, 0.7, 1
+
+                    BoxLayout:
+                        id: bg_box
+                        orientation: "vertical"
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: dp(8)
+
+                    Label:
+                        id: bg_error
+                        text: ""
+                        font_size: "13sp"
+                        size_hint_y: None
+                        height: dp(24) if self.text else 0
+                        color: 1, 0.4, 0.4, 1
+
+                    Label:
+                        id: input_text_label
+                        text: "Boja teksta u poljima za unos"
+                        font_size: "16sp"
+                        size_hint_y: None
+                        height: dp(30)
+                        color: 0.7, 0.7, 0.7, 1
+
+                    BoxLayout:
+                        id: input_text_box
+                        orientation: "vertical"
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: dp(8)
+
+                    Label:
+                        id: input_text_error
+                        text: ""
+                        font_size: "13sp"
+                        size_hint_y: None
+                        height: dp(24) if self.text else 0
+                        color: 1, 0.4, 0.4, 1
+
+                    Label:
+                        id: currency_label
+                        text: "Valuta"
+                        font_size: "16sp"
+                        size_hint_y: None
+                        height: dp(30)
+                        color: 0.7, 0.7, 0.7, 1
+
+                    BoxLayout:
+                        id: currency_box
+                        size_hint_y: None
+                        height: dp(48)
+                        spacing: dp(10)
+
+                    Label:
+                        id: kurs_label
+                        text: "Kurs (1 EUR = ? RSD)"
+                        font_size: "16sp"
+                        size_hint_y: None
+                        height: dp(30)
+                        color: 0.7, 0.7, 0.7, 1
+
+                    StyledTextInput:
+                        id: kurs_input
+                        size_hint_y: None
+                        height: dp(48)
+                        multiline: False
+                        input_filter: "float"
+                        on_text_validate: root.save_kurs(self.text)
+                        on_focus: if not self.focus: root.save_kurs(self.text)
+
+        Button:
+            size_hint: None, None
+            size: dp(110), dp(48)
+            pos_hint: {"x": 0.03, "y": 0.03}
+            background_normal: "assets/nazad_btn.png"
+            background_down: "assets/nazad_btn.png"
+            on_release: root.go_back()
