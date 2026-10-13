@@ -1,0 +1,154 @@
+#:import dp kivy.metrics.dp
+<HomeScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        padding: 30
+        spacing: 18
+
+        FloatLayout:
+            size_hint_y: None
+            height: dp(60)
+
+            Label:
+                markup: True
+                text: "[color=ff8c1a]Shopping[/color][color=3f8cff]List[/color]"
+                font_size: "30sp"
+                bold: True
+                size_hint: None, None
+                size: self.texture_size
+                pos_hint: {"center_x": 0.503, "center_y": 0.46}
+                opacity: 0.55
+
+            Label:
+                markup: True
+                text: "[color=3f8cff]Shopping[/color][color=ff8c1a]List[/color]"
+                font_size: "30sp"
+                bold: True
+                size_hint: None, None
+                size: self.texture_size
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+        GridLayout:
+            cols: 2
+            spacing: dp(16)
+            size_hint_y: None
+            height: dp(300)
+
+            BoxLayout:
+                orientation: "vertical"
+                spacing: dp(4)
+                Image:
+                    source: "assets/nova_lista.png"
+                    size_hint: None, None
+                    size: dp(64), dp(64)
+                    pos_hint: {"center_x": 0.5}
+                PrimaryButton:
+                    text: root.txt_new_list
+                    size_hint_y: None
+                    height: dp(56)
+                    on_release: root.go_to_new_list()
+
+            BoxLayout:
+                orientation: "vertical"
+                spacing: dp(4)
+                Image:
+                    source: "assets/istorija.png"
+                    size_hint: None, None
+                    size: dp(64), dp(64)
+                    pos_hint: {"center_x": 0.5}
+                Button:
+                    text: root.txt_history
+                    size_hint_y: None
+                    height: dp(56)
+                    background_normal: ""
+                    background_down: ""
+                    background_color: 0, 0, 0, 0
+                    color: 1, 1, 1, 1
+                    on_release: root.go_to_history()
+                    canvas.before:
+                        Color:
+                            rgba: 0.20, 0.60, 0.20, 1
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [dp(16)]
+
+            BoxLayout:
+                orientation: "vertical"
+                spacing: dp(4)
+                Image:
+                    source: "assets/baza.png"
+                    size_hint: None, None
+                    size: dp(64), dp(64)
+                    pos_hint: {"center_x": 0.5}
+                Button:
+                    text: root.txt_database
+                    size_hint_y: None
+                    height: dp(56)
+                    background_normal: ""
+                    background_down: ""
+                    background_color: 0, 0, 0, 0
+                    color: 1, 1, 1, 1
+                    on_release: root.go_to_database()
+                    canvas.before:
+                        Color:
+                            rgba: 0.55, 0.25, 0.75, 1
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [dp(16)]
+
+            BoxLayout:
+                orientation: "vertical"
+                spacing: dp(4)
+                Image:
+                    source: "assets/podesavanja.png"
+                    size_hint: None, None
+                    size: dp(64), dp(64)
+                    pos_hint: {"center_x": 0.5}
+                Button:
+                    text: root.txt_settings
+                    size_hint_y: None
+                    height: dp(56)
+                    background_normal: ""
+                    background_down: ""
+                    background_color: 0, 0, 0, 0
+                    color: 1, 1, 1, 1
+                    on_release: root.go_to_settings()
+                    canvas.before:
+                        Color:
+                            rgba: 0.85, 0.55, 0.10, 1
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [dp(16)]
+
+        FloatLayout:
+            Image:
+                source: "assets/nova_lista.png"
+                allow_stretch: True
+                keep_ratio: True
+                size_hint: 1, 1
+                pos_hint: {"x": 0, "y": 0}
+
+            BoxLayout:
+                orientation: "vertical"
+                size_hint: None, None
+                size: dp(60), dp(74)
+                pos_hint: {"right": 0.97, "y": 0.04}
+                spacing: dp(2)
+
+                Button:
+                    size_hint: None, None
+                    size: dp(52), dp(52)
+                    pos_hint: {"center_x": 0.5}
+                    background_normal: "assets/globe_icon.png"
+                    background_down: "assets/globe_icon.png"
+                    on_release: root.open_language_picker()
+
+                Label:
+                    text: root.txt_language_label
+                    font_size: "10sp"
+                    size_hint_y: None
+                    height: dp(18)
+                    color: 1, 1, 1, 1
