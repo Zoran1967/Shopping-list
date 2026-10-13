@@ -8,16 +8,22 @@ on:
 jobs:
   build:
     runs-on: ubuntu-22.04
-    timeout-minutes: 90
+    timeout-minutes: 120
 
     steps:
       - name: Preuzmi kod
         uses: actions/checkout@v4
 
-      - name: Python 3.10
+      - name: Raspakuj app.zip
+        run: |
+          rm -rf app
+          unzip -q -o app.zip -d app
+          find app -type f | sort
+
+      - name: Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.10"
+          python-version: "3.11"
 
       - name: Java 17
         uses: actions/setup-java@v4
@@ -32,12 +38,12 @@ jobs:
             pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 \
             cmake libffi-dev libssl-dev build-essential ccache
 
-      - name: Buildozer i Cython
+      - name: Buildozer
         run: |
           python -m pip install --upgrade pip
-          pip install buildozer "cython==0.29.36" virtualenv
+          pip install buildozer virtualenv
 
-      - name: Kes buildozer foldera
+      - name: Kes
         uses: actions/cache@v4
         with:
           path: |
@@ -46,11 +52,6 @@ jobs:
           key: buildozer-${{ runner.os }}-${{ hashFiles('buildozer.spec') }}
           restore-keys: |
             buildozer-${{ runner.os }}-
-
-      - name: Prihvati Android SDK licence
-        run: |
-          grep -q "^android.accept_sdk_license" buildozer.spec || \
-            sed -i '/^\[app\]/a android.accept_sdk_license = True' buildozer.spec
 
       - name: Build APK
         run: buildozer -v android debug
