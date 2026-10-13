@@ -16,8 +16,11 @@ jobs:
 
       - name: Raspakuj app.zip
         run: |
+          ls -la
+          Z=$(ls *.zip | head -1)
+          echo "Koristim: $Z"
           rm -rf app
-          unzip -q -o app.zip -d app
+          unzip -q -o "$Z" -d app
           find app -type f | sort
 
       - name: Python
