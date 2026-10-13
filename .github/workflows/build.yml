@@ -23,6 +23,16 @@ jobs:
           unzip -q -o "$Z" -d app
           find app -type f | sort
 
+      - name: Stalni kljuc za potpis
+        run: |
+          mkdir -p ~/.android
+          cp app/debug.keystore ~/.android/debug.keystore
+          rm app/debug.keystore
+
+      - name: Broj verzije
+        run: |
+          sed -i "/^\[app\]/a android.numeric_version = ${{ github.run_number }}" buildozer.spec
+
       - name: Python
         uses: actions/setup-python@v5
         with:
